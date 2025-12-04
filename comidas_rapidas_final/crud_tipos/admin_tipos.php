@@ -28,3 +28,7 @@ $tipos = $pdo->query('SELECT * FROM tipos ORDER BY id DESC')->fetchAll();
   </table>
 </section>
 <?php require __DIR__ . '/../includes/footer.php'; ?>
+    </tbody>
+  </table>
+</section>
+<?php require __DIR__ . '/../includes/footer.php'; ?>
