@@ -1,13 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION["usuario"])) {
+
+if (!isset($_SESSION["usuario"]) || $_SESSION["rol"] !== "admin") {
     header("Location: ../login/login.php");
     exit();
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <title>Panel Administrador</title>
     <link rel="stylesheet" href="/comidas_rapidas_final/css/dashboard.css">
@@ -47,4 +48,5 @@ if (!isset($_SESSION["usuario"])) {
 
 </body>
 </html>
+
 
