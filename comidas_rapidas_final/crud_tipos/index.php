@@ -1,8 +1,6 @@
-<link rel="stylesheet" href="/comidas_rapidas_final/css/tipos.css">
-<div class="container">
 <?php
 session_start();
-require "../includes/db.php";
+require_once "../includes/db.php";
 
 if (!isset($_SESSION["usuario"])) {
     header("Location: ../login/login.php");
@@ -17,11 +15,15 @@ if (isset($_GET["delete"])) {
 }
 ?>
 
+<link rel="stylesheet" href="/comidas_rapidas_final/css/tipos.css">
+
+<div class="container">
+
 <h2>Tipos de Productos</h2>
 
 <a href="crear.php">➕ Agregar nuevo tipo</a><br><br>
 
-<table border="1" cellpadding="5">
+<table border="1">
     <tr>
         <th>ID</th>
         <th>Nombre</th>
@@ -46,3 +48,6 @@ foreach ($tipos as $tipo) {
 
 <br><br>
 <a href="../admin/dashboard.php">⬅ Volver al panel</a>
+
+</div>
+
