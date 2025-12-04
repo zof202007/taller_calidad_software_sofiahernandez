@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/comidas_rapidas_final/css/tipos.css">
 <div class="container">
 <?php
-require "../includes/db.php";
+require_once "../includes/db.php";
 
 if ($_POST) {
     $nombre = $_POST["nombre"];
