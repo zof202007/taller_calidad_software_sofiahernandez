@@ -1,51 +1,46 @@
 <?php
-session_start();
-require "../includes/db.php";
-
-$error = "";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario = $_POST["usuario"];
-    $password = $_POST["password"];
-
-    $sql = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ? AND password = ?");
-    $sql->execute([$usuario, $password]);
-    $user = $sql->fetch();
-
-    if ($user) {
-        $_SESSION["usuario"] = $user["usuario"];
-        $_SESSION["rol"] = $user["rol"];
-        header("Location: ../admin/dashboard.php");
-        exit();
-    } else {
-        $error = "Usuario o contraseña incorrectos";
-    }
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 ?>
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
 <head>
-    <title>Login</title>
-    <link rel="stylesheet" href="/comidas_rapidas_final/css/login.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comidas Rápidas</title>
+  <link rel="stylesheet" href="/comidas_rapidas_final/css/style.css">
 </head>
 <body>
 
-<div class="login-box">
-    <h2>Login Administrador</h2>
+<header class="site-header">
+  <div class="container">
+    <h1><a href="/comidas_rapidas_final/index.php">Comidas Rápidas</a></h1>
 
-    <?php if ($error): ?>
-        <div class="error"><?= $error ?></div>
-    <?php endif; ?>
+    <nav>
+      <a href="/comidas_rapidas_final/index.php">Inicio</a>
 
-    <form method="POST">
-        <input type="text" name="usuario" placeholder="Usuario" required>
-        <input type="password" name="password" placeholder="Contraseña" required>
-        <button type="submit">Ingresar</button>
-    </form>
-</div>
+      <?php if (isset($_SESSION["usuario"])) { ?>
 
-</body>
-</html>
+          <?php if ($_SESSION["rol"] === "admin") { ?>
+              <a href="/comidas_rapidas_final/crud_productos/admin_productos.php">Productos</a>
+              <a href="/comidas_rapidas_final/crud_tipos/admin_tipos.php">Tipos</a>
+          <?php } ?>
+
+          <a href="/comidas_rapidas_final/login/logout.php">
+            Salir (<?php echo htmlspecialchars($_SESSION["usuario"]); ?>)
+          </a>
+
+      <?php } else { ?>
+
+          <a href="/comidas_rapidas_final/login/login.php">Login</a>
+
+      <?php } ?>
+    </nav>
+
+  </div>
+</header>
+
+<main class="container">
 
 
