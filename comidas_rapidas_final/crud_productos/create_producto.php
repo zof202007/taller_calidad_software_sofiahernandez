@@ -1,7 +1,5 @@
-<link rel="stylesheet" href="/comidas_rapidas_final/css/productos.css">
-<div class="container">
 <?php
-require "../includes/db.php";
+require_once "../includes/db.php";
 
 $tipos = $pdo->query("SELECT * FROM tipos")->fetchAll();
 
@@ -19,8 +17,20 @@ if ($_POST) {
     $sql->execute([$nombre, $descripcion, $precio, $imagen, $tipo]);
 
     header("Location: admin_productos.php");
+    exit();
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Producto</title>
+    <link rel="stylesheet" href="/comidas_rapidas_final/css/productos.css">
+</head>
+<body>
+
+<div class="container">
 
 <h2>Nuevo Producto</h2>
 
@@ -41,4 +51,11 @@ if ($_POST) {
     <button type="submit">Guardar</button>
 </form>
 
+<br>
+<a href="admin_productos.php">⬅ Volver</a>
+
+</div>
+
+</body>
+</html>
 <a href="admin_productos.php">⬅ Volver</a>
