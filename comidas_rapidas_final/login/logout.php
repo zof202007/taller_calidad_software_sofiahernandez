@@ -1,6 +1,13 @@
 <?php
 session_start();
+
+/* Vaciar todas las variables de sesión */
+$_SESSION = [];
+
+/* Destruir la sesión */
 session_destroy();
-header("Location: login.php");
+
+/* Redirigir al login */
+header("Location: ../login/login.php");
 exit();
 ?>
