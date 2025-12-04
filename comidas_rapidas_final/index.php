@@ -1,5 +1,5 @@
 <?php
-require "includes/db.php";
+require_once "includes/db.php";
 
 $sql = $pdo->query("
     SELECT productos.*, tipos.nombre_tipo 
@@ -10,8 +10,9 @@ $productos = $sql->fetchAll();
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Tienda de Comidas Rápidas</title>
   <link rel="stylesheet" href="/comidas_rapidas_final/css/index.css">
 </head>
@@ -23,13 +24,16 @@ $productos = $sql->fetchAll();
   <a href="/comidas_rapidas_final/login/login.php">Iniciar Sesión</a>
 </div>
 
-
 <div class="tienda">
 
   <?php foreach ($productos as $p): ?>
 
   <div class="card-producto">
-    <img src="images/<?= $p["imagen"] ?>">
+    <img 
+      src="images/<?= $p["imagen"] ?>" 
+      alt="Producto <?= htmlspecialchars($p["nombre"]) ?>"
+    >
+
     <div class="contenido">
       <h3><?= $p["nombre"] ?></h3>
       <p><?= $p["descripcion"] ?></p>
